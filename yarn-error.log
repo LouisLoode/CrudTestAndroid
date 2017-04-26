@@ -1,0 +1,36 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/bin/yarn global bin
+
+PATH: 
+  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/ImageMagick/bin
+
+Yarn version: 
+  0.23.2
+
+Node version: 
+  6.10.2
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  No manifest
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: EACCES: permission denied, open '/Users/louisloode/Library/Caches/Yarn/.roadrunner.json'
+      at Error (native)
+      at Object.fs.openSync (fs.js:641:18)
+      at Object.fs.writeFileSync (fs.js:1347:33)
+      at /usr/local/Cellar/yarn/0.23.2/libexec/node_modules/roadrunner/index.js:25:6
+      at /usr/local/Cellar/yarn/0.23.2/libexec/node_modules/roadrunner/index.js:12:12
+      at emitOne (events.js:101:20)
+      at process.emit (events.js:188:7)
+      at processEmit [as emit] (/usr/local/Cellar/yarn/0.23.2/libexec/node_modules/signal-exit/index.js:149:35)
+      at process.exit (internal/process.js:164:15)
+      at exit (/usr/local/Cellar/yarn/0.23.2/libexec/lib/cli/index.js:426:13)
