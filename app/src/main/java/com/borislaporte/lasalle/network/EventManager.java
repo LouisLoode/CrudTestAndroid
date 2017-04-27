@@ -1,15 +1,11 @@
 package com.borislaporte.lasalle.network;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.borislaporte.lasalle.LasalleApp;
 import com.borislaporte.lasalle.model.Event;
 import com.borislaporte.lasalle.model.EventResult;
 import com.borislaporte.lasalle.model.EventResults;
-import com.bumptech.glide.load.model.Headers;
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.type.SimpleType;
 import com.neopixl.library.spitfire.listener.RequestListener;
 import com.neopixl.library.spitfire.request.BaseRequest;
 
@@ -83,6 +79,7 @@ public class EventManager {
                 .add(resultsBuilder.build());
     }
 
+
     public static void createEvent(final Event event) {
         String url = UrlBuilder.getCreateEventUrl();
 
@@ -110,5 +107,30 @@ public class EventManager {
                 .getSharedInstance()
                 .getRequestQueue()
                 .add(resultBuilder.build());
+    }
+
+    public static void deleteEvent(String eventId, final Listener<Event> listener) {
+        String url = UrlBuilder.getDeleteEventUrl(eventId);
+
+        BaseRequest.Builder<EventResult> resultsBuilder =
+                new BaseRequest.Builder<>(Request.Method.DELETE, url, EventResult.class);
+        resultsBuilder.listener(new RequestListener<EventResult>() {
+
+            @Override
+            public void onSuccess(EventResult eventResult) {
+                if (listener != null) {
+                    listener.onReceived(eventResult.getEvent());
+                }
+            }
+
+            @Override
+            public void onFailure(VolleyError volleyError, int i) {
+
+            }
+        });
+
+        LasalleApp.getSharedInstance()
+                .getRequestQueue()
+                .add(resultsBuilder.build());
     }
 }

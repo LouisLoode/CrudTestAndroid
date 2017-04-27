@@ -2,14 +2,14 @@ package com.borislaporte.lasalle.fragment;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.VolleyError;
 import com.borislaporte.lasalle.R;
 import com.borislaporte.lasalle.model.Event;
 import com.borislaporte.lasalle.network.EventManager;
@@ -69,6 +69,42 @@ public class EventDetailFragment extends BaseFragment {
         rootView.setClickable(true);
 
         ButterKnife.bind(this, rootView);
+
+        final Button deleteButton = (Button) rootView.findViewById(R.id.detail_delete_event);
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String eventId = getArguments().getString(ARGUMENT_EVENT_ID);
+
+                Log.e("eventId",eventId);
+
+                showLoading();
+
+                EventManager.deleteEvent(eventId, new EventManager.Listener<Event>() {
+
+                    @Override
+                    public void onReceived(Event result) {
+                        refresh(result);
+                        //Log.e("deleteEvent","DEBUG onReceived");
+
+                        getActivity().finish();
+
+
+                        hideLoading();
+                    }
+
+                    @Override
+                    public void onFailed() {
+
+                        hideLoading();
+                        //Log.e("deleteEvent","DEBUG onReceived");
+                    }
+                });
+            }
+        });
+
         return rootView;
     }
 
