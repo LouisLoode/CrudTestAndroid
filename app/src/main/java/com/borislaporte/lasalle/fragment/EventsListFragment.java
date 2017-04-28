@@ -1,7 +1,6 @@
 package com.borislaporte.lasalle.fragment;
 
 
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -13,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.android.volley.VolleyError;
 import com.borislaporte.lasalle.R;
 import com.borislaporte.lasalle.activity.EventDetailActivity;
 import com.borislaporte.lasalle.adapter.EventItem;
@@ -78,7 +76,8 @@ public class EventsListFragment extends Fragment {
                 ActivityOptionsCompat options = ActivityOptionsCompat.
                         makeSceneTransitionAnimation(getActivity(), rowImageView ,transitionName);
 
-                Intent intent = EventDetailActivity.createIntent(getContext(), eventId);
+                //Intent intent = EventDetailActivity.createIntent(getContext(), eventId);
+                Intent intent = EventDetailActivity.createIntent(getContext(), position);
                 startActivity(intent, options.toBundle());
 
                 return true;

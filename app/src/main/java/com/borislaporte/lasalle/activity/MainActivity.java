@@ -30,18 +30,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menu_create:
 
-                /*Event event = new Event();
-                event.setName("Bitches Party");
-                event.setImageUrl("http://data.whicdn.com/images/211084613/large.jpg");
-                event.setDescription("Viens bouger tes fesses comme un bitches !");
-                event.setInformation("De nombreuses Bitches seront la pour un maximum d'ambiance !");
-                Event.Location location = new Event.Location();
-                location.setLongitude(79.9449);
-                location.setLatitude(-58.2758);
-                event.setLocation(location);
-                EventManager.createEvent(event);*/
-
-                // Start the Signup activity
+                // Start the Add Event activity
                 Intent intent = new Intent(getApplicationContext(), EventAddActivity.class);
                 startActivityForResult(intent, REQUEST_ADD_EVENT);
 

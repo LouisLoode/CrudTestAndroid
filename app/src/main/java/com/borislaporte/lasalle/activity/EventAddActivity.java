@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.borislaporte.lasalle.R;
+import com.borislaporte.lasalle.model.Event;
+import com.borislaporte.lasalle.network.EventManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,12 +23,11 @@ public class EventAddActivity extends AppCompatActivity {
     private static final String TAG = "AddEventActivity";
     private static final int REQUEST_ADD_EVENT = 0;
 
+
     @BindView(R.id.input_name) EditText _nameText;
     @BindView(R.id.input_imageUrl) EditText _imageUrlText;
     @BindView(R.id.input_description) EditText _descriptionText;
     @BindView(R.id.input_information) EditText _informationText;
-    //@BindView(R.id.input_latitude) EditText _latitudeText;
-    //@BindView(R.id.input_longitude) EditText _longitudeText;
     @BindView(R.id.btn_event_add) Button _addEventButton;
 
 
@@ -35,6 +36,7 @@ public class EventAddActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_add);
+
         ButterKnife.bind(this);
 
         _addEventButton.setOnClickListener(new View.OnClickListener() {
@@ -66,8 +68,21 @@ public class EventAddActivity extends AppCompatActivity {
         String imageUrl = _imageUrlText.getText().toString();
         String description = _descriptionText.getText().toString();
         String information = _informationText.getText().toString();
+        double latitude = 0;
+        double longitude = 0;
 
         // TODO: Implement your own authentication logic here.
+
+        Event event = new Event();
+                event.setName(name);
+                event.setImageUrl(imageUrl);
+                event.setDescription(description);
+                event.setInformation(information);
+                Event.Location location = new Event.Location();
+                location.setLongitude(longitude);
+                location.setLatitude(latitude);
+                event.setLocation(location);
+                EventManager.createEvent(event);
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
