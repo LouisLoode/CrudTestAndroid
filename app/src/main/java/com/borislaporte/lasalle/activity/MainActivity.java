@@ -1,16 +1,15 @@
 package com.borislaporte.lasalle.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.borislaporte.lasalle.R;
-import com.borislaporte.lasalle.model.Event;
-import com.borislaporte.lasalle.network.EventManager;
 
 public class MainActivity extends AppCompatActivity {
-
+    private static final int REQUEST_ADD_EVENT = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menu_create:
 
-                Event event = new Event();
+                /*Event event = new Event();
                 event.setName("Bitches Party");
                 event.setImageUrl("http://data.whicdn.com/images/211084613/large.jpg");
                 event.setDescription("Viens bouger tes fesses comme un bitches !");
@@ -40,7 +39,11 @@ public class MainActivity extends AppCompatActivity {
                 location.setLongitude(79.9449);
                 location.setLatitude(-58.2758);
                 event.setLocation(location);
-                EventManager.createEvent(event);
+                EventManager.createEvent(event);*/
+
+                // Start the Signup activity
+                Intent intent = new Intent(getApplicationContext(), EventAddActivity.class);
+                startActivityForResult(intent, REQUEST_ADD_EVENT);
 
         }
 
