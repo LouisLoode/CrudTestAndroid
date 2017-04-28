@@ -109,6 +109,35 @@ public class EventManager {
                 .add(resultBuilder.build());
     }
 
+    public static void updateEvent(String eventId, final Event event) {
+        String url = UrlBuilder.getCreateEventUrl();
+
+        BaseRequest.Builder<EventResult> resultBuilder =
+                new BaseRequest.Builder<>(Request.Method.PUT, url, EventResult.class);
+        resultBuilder.object(event);
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Content-Type", "application/json");
+
+        resultBuilder
+                .headers(headers)
+                .listener(new RequestListener<EventResult>() {
+                    @Override
+                    public void onSuccess(EventResult eventResult) {
+
+                    }
+
+                    @Override
+                    public void onFailure(VolleyError volleyError, int i) {
+
+                    }
+                });
+
+        LasalleApp
+                .getSharedInstance()
+                .getRequestQueue()
+                .add(resultBuilder.build());
+    }
+
     public static void deleteEvent(String eventId, final Listener<Event> listener) {
         String url = UrlBuilder.getDeleteEventUrl(eventId);
 
